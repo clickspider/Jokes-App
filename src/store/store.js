@@ -89,18 +89,15 @@ export const store = new Vuex.Store({
       commit("logUserOut");
     },
 
-    retrieveToken({ commit }, credentials) {
-      return new Promise(async (res, reject) => {
-        try {
-          const GET_TOKEN = await axios.get(
-            `http://localhost:3000/login/${credentials.username},${credentials.password}`
-          );
-          res(GET_TOKEN);
-          commit("updateToken", GET_TOKEN);
-        } catch (err) {
-          reject(err);
-        }
-      });
+    async retrieveToken({ commit }, credentials) {
+      try {
+        const GET_TOKEN = await axios.get(
+          `http://localhost:3000/login/${credentials.username},${credentials.password}`
+        );
+        commit("updateToken", GET_TOKEN);
+      } catch (err) {
+        commit("updateToken", err);
+      }
     },
 
     async retrieveProfile({ commit, state }) {
@@ -111,7 +108,7 @@ export const store = new Vuex.Store({
 
         commit("updateProfile", GET_PROFILE);
       } catch (err) {
-        console.log(err);
+        commit("updateProfile", err);
       }
     },
 

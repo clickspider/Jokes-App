@@ -99,25 +99,20 @@ export default {
   },
   methods: {
     ...mapActions(["retrieveToken"]),
-    login() {
-      this.retrieveToken({
-        username: this.username,
-        password: this.password
-      })
-        .then(res => {
-          if (res) {
-            this.loader = false;
-            this.error = false;
-            this.success = true;
-            this.$router.push({ name: "FavJokes" });
-          }
-        })
-        .catch(err => {
-          setTimeout(() => {
-            this.loader = false;
-            this.error = err;
-          }, 1000);
-        });
+    async login() {
+      const { username, password } = this;
+      try {
+        await this.retrieveToken({ username, password });
+        this.loader = false;
+        this.error = false;
+        this.success = true;
+        this.$router.push({ name: "FavJokes" });
+      } catch (err) {
+        setTimeout(() => {
+          this.loader = false;
+          this.error = err;
+        }, 1000);
+      }
     },
 
     validateLogin() {
