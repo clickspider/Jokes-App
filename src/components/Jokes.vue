@@ -81,18 +81,10 @@ export default {
     ...mapGetters(["jokes", "favJokes", "maxItemsInList", "userProfile"])
   },
   methods: {
-    ...mapActions(["likeJoke", "unLikeJoke", "removeAllFav"]),
+    ...mapActions(["likeJoke", "unLikeJoke", "removeAllFav", "getData"]),
     checkLikeJoke(joke) {
       const MAX = this.maxItemsInList - 1;
-      this.favJokes.forEach(element => {
-        if (this.favJokes.length <= MAX && element.id !== joke.id) {
-          return joke;
-        } else {
-          joke = "";
-        }
-      });
-
-      return joke !== "" ? this.likeJoke(joke) : "";
+      if (this.favJokes.length <= MAX) this.likeJoke(joke);
     }
   }
 };
