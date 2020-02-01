@@ -106,9 +106,13 @@ export const store = new Vuex.Store({
 
     async retrieveProfile({ commit, state }) {
       try {
-        const GET_PROFILE = await axios.get(
-          `http://localhost:3000/profile/${state.token}`
-        );
+        const api_url = "http://localhost:4000/api/v1/users/myprofile";
+        const TOKEN = state.token;
+
+        const GET_PROFILE = await axios.get(api_url, {
+          headers: { Authorization: `Bearer ${TOKEN}` },
+          key: "value"
+        });
 
         commit("updateProfile", GET_PROFILE);
       } catch (err) {

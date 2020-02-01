@@ -26,20 +26,4 @@ app.get("/joke", async (req, res) => {
   }
 });
 
-app.get("/profile/:token", async (req, res) => {
-  try {
-    const TOKEN = req.params.token;
-    const api_url = "http://localhost:4000/api/v1/users/myprofile";
-    const fetch_res = await axios.get(api_url, {
-      headers: { Authorization: `Bearer ${TOKEN}` },
-      key: "value"
-    });
-    res.send(fetch_res.data);
-  } catch (err) {
-    return res.status(err.response.status).json({
-      err: err.response.data.err
-    });
-  }
-});
-
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
