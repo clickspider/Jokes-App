@@ -63,7 +63,7 @@
 
         <v-btn
           :loading="loading"
-          :disabled="isOffline || loading"
+          :disabled="loading"
           color="error"
           @click="logOut"
           v-if="loggedIn"
@@ -91,7 +91,7 @@
           v-if="loggedIn"
         >
           <v-list-item
-            v-for="item in items"
+            v-for="item in itemsUserIn"
             :key="item.title"
             link
             :to="item.url"
@@ -109,7 +109,7 @@
         </v-list-item-group>
         <v-list-item-group v-model="group" active-class="text--accent-4" v-else>
           <v-list-item
-            v-for="item in itemsTwo"
+            v-for="item in itemsUserOut"
             :key="item.title"
             link
             :to="item.url"
@@ -158,11 +158,11 @@ export default {
       isFetching: false,
       group: null,
       timer: "",
-      items: [
+      itemsUserIn: [
         { title: "Dashboard", icon: "mdi-view-dashboard", url: "/" },
         { title: "Liked-Jokes", icon: "mdi-heart", url: "/fav" }
       ],
-      itemsTwo: [{ title: "Login", icon: "mdi-login", url: "/" }]
+      itemsUserOut: [{ title: "Login", icon: "mdi-login", url: "/" }]
     };
   },
 

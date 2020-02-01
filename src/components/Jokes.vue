@@ -81,7 +81,7 @@ export default {
     ...mapGetters(["jokes", "favJokes", "maxItemsInList", "userProfile"])
   },
   methods: {
-    ...mapActions(["likeJoke", "unLikeJoke", "removeAllFav"]),
+    ...mapActions(["likeJoke", "unLikeJoke", "removeAllFav", "getData"]),
     checkLikeJoke(joke) {
       const MAX = this.maxItemsInList - 1;
       if (this.favJokes.length <= MAX) this.likeJoke(joke);

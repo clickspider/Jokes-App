@@ -91,9 +91,13 @@ export const store = new Vuex.Store({
 
     async retrieveToken({ commit }, credentials) {
       try {
-        const GET_TOKEN = await axios.get(
-          `http://localhost:3000/login/${credentials.username},${credentials.password}`
-        );
+        const api_url = "http://localhost:4000/login";
+        const username = credentials.username;
+        const password = credentials.password;
+        const GET_TOKEN = await axios.post(api_url, {
+          username,
+          password
+        });
         commit("updateToken", GET_TOKEN);
       } catch (err) {
         commit("updateToken", err);
